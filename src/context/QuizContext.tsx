@@ -27,8 +27,6 @@ interface QuizContextType {
   getNextRoute: (currentRoute: string) => string;
   selectedGoalsCount: number;
   setSelectedGoalsCount: (count: number) => void;
-  exerciseStyle: string[];
-  setExerciseStyle: (styles: string[]) => void;
   availableTime: string | null;
   setAvailableTime: (time: string | null) => void;
   bodyMassIndex: number | null;
@@ -64,7 +62,6 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
   const [bodyType, setBodyType] = useState<BodyType>(null);
   const [dreamBody, setDreamBody] = useState<DreamBody>(null);
   const [selectedGoalsCount, setSelectedGoalsCount] = useState(0);
-  const [exerciseStyle, setExerciseStyle] = useState<string[]>([]);
   const [availableTime, setAvailableTime] = useState<string | null>(null);
   const [bodyMassIndex, setBodyMassIndex] = useState<number | null>(null);
   const [yogaLevel, setYogaLevel] = useState<string | null>(null);
@@ -142,8 +139,6 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
     '/chair-yoga-experience',
     '/activity-level',
     '/sensitivity-check',
-    '/support-step',
-    '/exercise-style',
     '/available-time',
     '/bmi-calculator',
     '/profile-summary',
@@ -230,8 +225,6 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
         getNextRoute,
         selectedGoalsCount,
         setSelectedGoalsCount,
-        exerciseStyle,
-        setExerciseStyle,
         availableTime,
         setAvailableTime,
         bodyMassIndex,

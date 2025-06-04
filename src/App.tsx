@@ -14,7 +14,6 @@ import ActivityLevel from './components/ActivityLevel';
 // Consolidado com ChairYogaExperience: import YogaLevel from './components/YogaLevel';
 import SensitivityCheck from './components/SensitivityCheck';
 import SupportStep from './components/SupportStep';
-import ExerciseStylePreference from './components/ExerciseStylePreference';
 import AvailableTime from './components/AvailableTime';
 import BMICalculator from './components/BMICalculator';
 import ProfileSummary from './components/ProfileSummary';
@@ -78,7 +77,6 @@ function App() {
             {/* Consolidado: <Route path="/yoga-level" element={<YogaLevel />} /> */}
             <Route path="/sensitivity-check" element={<SensitivityCheck />} />
             <Route path="/support-step" element={<SupportStep />} />
-            <Route path="/exercise-style" element={<ExerciseStylePreference />} />
             <Route path="/available-time" element={<AvailableTime />} />
             <Route path="/bmi-calculator" element={<BMICalculator />} />
             <Route path="/profile-summary" element={<ProfileSummary />} />

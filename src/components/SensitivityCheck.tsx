@@ -75,9 +75,9 @@ const SensitivityCheck: React.FC = () => {
 
   const handleNext = () => {
     if (selectedItems.includes(NONE_OPTION_ID) || selectedItems.length === 0) {
-      navigate(preserveUtmParams('/exercise-style'));
+      navigate(preserveUtmParams('/available-time'));
     } else {
-      navigate(preserveUtmParams('/support-step'));
+      navigate(preserveUtmParams('/available-time'));
     }
   };
 
