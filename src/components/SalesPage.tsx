@@ -43,9 +43,6 @@ const SalesPage: React.FC = () => {
 
   const [timeLeft, setTimeLeft] = useState({ minutes: 15, seconds: 0 });
   const [expanded, setExpanded] = useState<number | null>(null);
-  const [expandedObjection, setExpandedObjection] = useState<string | null>(
-    null
-  );
   const [userEmail, setUserEmail] = useState(email || '');
   const [selectedPricing, setSelectedPricing] = useState('premium');
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -288,38 +285,6 @@ const SalesPage: React.FC = () => {
       author: 'Roberto F., 48 anos',
       image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg',
       relevance: ['manage-mood'],
-    },
-  ];
-
-  // Objeções comuns
-  const commonObjections = [
-    {
-      id: 'time',
-      objection: 'Não tenho tempo para exercícios',
-      response:
-        'É por isso que desenvolvemos um método que requer apenas 15 minutos por dia, podendo ser feito durante reuniões de trabalho ou assistindo TV, sem precisar se deslocar para a academia.',
-      icon: <Clock className="w-5 h-5" />,
-    },
-    {
-      id: 'results',
-      objection: 'Será que realmente funciona?',
-      response:
-        'Mais de 9.879 pessoas já transformaram seus corpos com nosso método. 87% relataram melhora significativa nas primeiras 2 semanas. Nossa taxa de satisfação é de 98% e oferecemos garantia de 100% de satisfação.',
-      icon: <Award className="w-5 h-5" />,
-    },
-    {
-      id: 'value',
-      objection: 'O investimento vale a pena?',
-      response:
-        'Por menos que um café por dia, você tem acesso a um método completo que substituiria sessões de fisioterapia (R$150-250 cada) ou personal trainer. Além disso, oferecemos garantia total de resultados.',
-      icon: <DollarSign className="w-5 h-5" />,
-    },
-    {
-      id: 'difficulty',
-      objection: 'Parece complicado para mim',
-      response:
-        'Nosso método foi desenvolvido especificamente para pessoas sem experiência. As instruções são ultra detalhadas e temos suporte para ajudar. Adaptamos todos os exercícios para diferentes níveis e condições físicas.',
-      icon: <HelpCircle className="w-5 h-5" />,
     },
   ];
 
@@ -1190,52 +1155,6 @@ const SalesPage: React.FC = () => {
                       <p className="text-sm text-gray-600">{faq.answer}</p>
                     </motion.div>
                   )}
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Objeções comuns */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-              {commonObjections.map((objection, index) => (
-                <motion.div
-                  key={objection.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
-                  className="bg-white rounded-lg p-4 border border-purple-100 shadow-sm"
-                >
-                  <button
-                    onClick={() =>
-                      setExpandedObjection(
-                        expandedObjection === objection.id ? null : objection.id
-                      )
-                    }
-                    className="flex items-start gap-3 w-full text-left"
-                  >
-                    <div className="p-2 bg-[#7432B4]/10 rounded-full flex-shrink-0">
-                      {objection.icon}
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium text-[#2D1441]">
-                        {objection.objection}?
-                      </p>
-                      {expandedObjection === objection.id && (
-                        <motion.p
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          className="text-sm text-gray-600 mt-2"
-                        >
-                          {objection.response}
-                        </motion.p>
-                      )}
-                    </div>
-                    <ChevronDown
-                      className={`w-4 h-4 text-[#7432B4] mt-1 transition-transform ${
-                        expandedObjection === objection.id ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
                 </motion.div>
               ))}
             </div>
