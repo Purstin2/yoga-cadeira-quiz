@@ -1,11 +1,11 @@
 /**
- * Utilitários para rastreamento de análises com o Facebook Pixel
+ * Utilitários para rastreamento de análises com o UTMify
  */
 
-// Declaração de tipo para o objeto fbq global
+// Declaração de tipo para o objeto utmify global
 declare global {
   interface Window {
-    fbq: any;
+    utmify: any;
   }
 }
 
@@ -13,37 +13,37 @@ declare global {
  * Rastreia um evento de PageView padrão
  */
 export const trackPageView = () => {
-  if (window.fbq) {
-    window.fbq('track', 'PageView');
+  if (window.utmify) {
+    window.utmify.track('pageview');
   }
 };
 
 /**
- * Rastreia um evento personalizado no Facebook Pixel
+ * Rastreia um evento personalizado no UTMify
  * @param eventName - Nome do evento a ser rastreado
  * @param params - Parâmetros adicionais do evento (opcional)
  */
 export const trackEvent = (eventName: string, params?: Record<string, any>) => {
-  if (window.fbq) {
+  if (window.utmify) {
     if (params) {
-      window.fbq('track', eventName, params);
+      window.utmify.track(eventName, params);
     } else {
-      window.fbq('track', eventName);
+      window.utmify.track(eventName);
     }
   }
 };
 
 /**
- * Eventos padrão do Facebook Pixel para facilitar o uso
+ * Eventos padrão do UTMify para facilitar o uso
  */
 export const PixelEvents = {
-  COMPLETE_REGISTRATION: 'CompleteRegistration',
-  LEAD: 'Lead',
-  VIEW_CONTENT: 'ViewContent',
-  ADD_TO_CART: 'AddToCart',
-  INITIATE_CHECKOUT: 'InitiateCheckout',
-  ADD_PAYMENT_INFO: 'AddPaymentInfo',
-  PURCHASE: 'Purchase',
+  COMPLETE_REGISTRATION: 'complete_registration',
+  LEAD: 'lead',
+  VIEW_CONTENT: 'view_content',
+  ADD_TO_CART: 'add_to_cart',
+  INITIATE_CHECKOUT: 'initiate_checkout',
+  ADD_PAYMENT_INFO: 'add_payment_info',
+  PURCHASE: 'purchase',
 };
 
 export default {
