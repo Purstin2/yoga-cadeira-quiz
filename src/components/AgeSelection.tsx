@@ -5,7 +5,7 @@ import { useQuiz } from '../context/QuizContext';
 import { motion } from 'framer-motion';
 import Header from './Header';
 
-const AgeSelection: React.FC = () => {
+const AgeSelection: React.FC = () =>  {
   const navigate = useNavigate();
   const location = useLocation();
   const { setAgeRange, getNextRoute, preserveUtmParams } = useQuiz();
