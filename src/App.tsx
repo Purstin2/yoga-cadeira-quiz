@@ -17,7 +17,6 @@ import SupportStep from './components/SupportStep';
 import AvailableTime from './components/AvailableTime';
 import BMICalculator from './components/BMICalculator';
 import ProfileSummary from './components/ProfileSummary';
-import ResultsPage from './components/ResultsPage';
 import SalesPage from './components/SalesPage';
 import Checkout from './components/Checkout';
 import SuccessPage from './components/SuccessPage';
@@ -43,9 +42,7 @@ function App() {
     });
     
     // Eventos específicos para etapas importantes do funil
-    if (location.pathname === '/results') {
-      trackEvent('QuizCompleted');
-    } else if (location.pathname === '/sales') {
+    if (location.pathname === '/sales') {
       trackEvent('SalesPageView');
     } else if (location.pathname === '/checkout') {
       trackEvent(PixelEvents.INITIATE_CHECKOUT);
@@ -80,7 +77,6 @@ function App() {
             <Route path="/available-time" element={<AvailableTime />} />
             <Route path="/bmi-calculator" element={<BMICalculator />} />
             <Route path="/profile-summary" element={<ProfileSummary />} />
-            <Route path="/results" element={<ResultsPage />} />
             <Route path="/sales" element={<SalesPage />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/success" element={<SuccessPage />} />

@@ -68,7 +68,7 @@ const ProfileSummary: React.FC = () => {
   }, [bodyMassIndex, navigate]);
 
   const handleNext = () => {
-    navigate(preserveUtmParams('/results'));
+    navigate(preserveUtmParams('/sales'));
   };
 
   const getFitnessLevel = () => {

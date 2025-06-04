@@ -142,7 +142,6 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
     '/available-time',
     '/bmi-calculator',
     '/profile-summary',
-    '/results',
     '/sales',
     '/checkout',
     '/success'
