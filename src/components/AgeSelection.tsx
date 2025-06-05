@@ -40,16 +40,6 @@ const AgeSelection: React.FC = () =>  {
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
       <div className="flex-1 flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-10 pb-6">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-2 bg-purple-100 text-purple-700 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-6"
-        >
-          <Clock className="w-4 h-4" />
-          <span>AVALIAÇÃO GRATUITA DE MOBILIDADE</span>
-        </motion.div>
-
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#2D1441] text-center leading-tight mb-4 max-w-3xl">
           CRIE SEU PERFIL PERSONALIZADO {' '}
           <span className="text-[#7432B4]">YOGA NA CADEIRA</span> QUE ALIVIARÁ SUAS DORES NO CORPO EM 21 DIAS
