@@ -87,7 +87,7 @@ const SalesPage: React.FC = () => {
 
   // External checkout URL - single point to update
   const EXTERNAL_CHECKOUT_URL =
-    'https://pagamento.fenjes.com/checkout/184693584:1';
+    'https://pay.kirvano.com/3e8ceecb-0d43-4640-9f44-07643fbc0aff';
 
   // Monitorar progresso de rolagem
   useEffect(() => {
@@ -223,10 +223,9 @@ const SalesPage: React.FC = () => {
         content_name: 'Yoga na Cadeira Premium',
       });
 
-      // Redirect to external checkout com UTMs preservados
+      // Redirect to external checkout
       setTimeout(() => {
-        const urlWithUtms = preserveUtmParams(EXTERNAL_CHECKOUT_URL);
-        window.location.href = urlWithUtms;
+        window.location.href = EXTERNAL_CHECKOUT_URL;
       }, 1500);
     }
   };
