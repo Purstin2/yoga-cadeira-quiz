@@ -26,7 +26,6 @@ import confetti from 'canvas-confetti';
 import Header from './Header';
 import AnimatedPage from './AnimatedPage';
 import { useQuiz } from '../context/QuizContext';
-import { trackEvent, PixelEvents } from '../utils/analytics';
 
 const SalesPage: React.FC = () => {
   const navigate = useNavigate();
@@ -185,12 +184,6 @@ const SalesPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isEmailValid) {
-      // Rastrear evento de Lead
-      trackEvent(PixelEvents.LEAD, {
-        content_name: 'sales_page_form',
-        content_category: 'lead_capture',
-      });
-
       // Efeito de confete
       setShowConfetti(true);
       confetti({
@@ -216,13 +209,6 @@ const SalesPage: React.FC = () => {
       );
       setProcessingPurchase(true);
 
-      // Rastrear evento de Iniciar Checkout
-      trackEvent(PixelEvents.INITIATE_CHECKOUT, {
-        currency: 'BRL',
-        value: 197.0,
-        content_name: 'Yoga na Cadeira Premium',
-      });
-
       // Redirect to external checkout
       setTimeout(() => {
         window.location.href = EXTERNAL_CHECKOUT_URL;
@@ -232,13 +218,6 @@ const SalesPage: React.FC = () => {
 
   // Redirect to external checkout
   const redirectToCheckout = () => {
-    // Rastrear evento de Iniciar Checkout
-    trackEvent(PixelEvents.INITIATE_CHECKOUT, {
-      currency: 'BRL',
-      value: 197.0,
-      content_name: 'Yoga na Cadeira Premium',
-    });
-
     window.location.href = EXTERNAL_CHECKOUT_URL;
   };
 
@@ -285,6 +264,48 @@ const SalesPage: React.FC = () => {
       image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg',
       relevance: ['manage-mood'],
     },
+    {
+      quote:
+        'Sofro de artrite há anos e sempre tive medo de fazer exercícios. Este método mudou minha vida! Consigo me movimentar sem dor e até brinco com meus netos novamente.',
+      author: 'Ana Beatriz, 65 anos',
+      image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg',
+      relevance: ['improve-mobility', 'senior'],
+    },
+    {
+      quote:
+        'Trabalho em home office e estava engordando muito. Em 3 semanas já perdi 5kg e minha postura melhorou demais. O melhor é que faço tudo sentada!',
+      author: 'Juliana R., 35 anos',
+      image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg',
+      relevance: ['lose-weight', 'improve-mobility'],
+    },
+    {
+      quote:
+        'Tenho fibromialgia e sempre sofri com dores. Este método me ajudou a controlar as crises e melhorar minha qualidade de vida. Até meu marido notou a diferença!',
+      author: 'Fernanda C., 52 anos',
+      image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg',
+      relevance: ['improve-mobility'],
+    },
+    {
+      quote:
+        'Sou professora e passo o dia todo em pé. No final do dia, minhas pernas doíam muito. Agora faço os exercícios durante o intervalo e as dores sumiram!',
+      author: 'Lucia M., 45 anos',
+      image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg',
+      relevance: ['improve-mobility'],
+    },
+    {
+      quote:
+        'Depois da menopausa, engordei muito e perdi a autoestima. Em 21 dias já perdi 6kg e me sinto mais disposta. Até minha filha comentou que estou mais animada!',
+      author: 'Rita S., 55 anos',
+      image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg',
+      relevance: ['lose-weight', 'manage-mood'],
+    },
+    {
+      quote:
+        'Tenho diabetes e precisava me exercitar, mas sempre desistia. Este método é tão simples que consigo manter a consistência. Minha glicemia melhorou muito!',
+      author: 'Márcia L., 60 anos',
+      image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg',
+      relevance: ['improve-mobility'],
+    }
   ];
 
   // Value stack itens
@@ -347,26 +368,12 @@ const SalesPage: React.FC = () => {
   const scrollToForm = () => {
     document.getElementById('buy-form')?.scrollIntoView({ behavior: 'smooth' });
 
-    // Rastrear evento de interesse
-    trackEvent('FormView', {
-      content_name: 'sales_page_form_view',
-    });
-
     // Focar o input de email
     setTimeout(() => {
       setFormFocused(true);
       document.getElementById('email-input')?.focus();
     }, 500);
   };
-
-  // Adicionar rastreamento de visualização de página quando o componente montar
-  useEffect(() => {
-    // Rastrear visualização da página de vendas
-    trackEvent('SalesPageDetailedView', {
-      content_name: 'sales_page',
-      content_category: 'sales',
-    });
-  }, []);
 
   return (
     <AnimatedPage>
@@ -381,29 +388,6 @@ const SalesPage: React.FC = () => {
           {/* Background removed as requested */}
 
           <div className="max-w-4xl mx-auto text-center relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center bg-white/10 text-yellow-300 backdrop-blur-sm rounded-xl py-2 px-4 mb-5 whitespace-nowrap overflow-hidden"
-            >
-              <motion.div
-                animate={{
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatDelay: 1,
-                }}
-              >
-                <Shield className="w-5 h-5 mr-2" />
-              </motion.div>
-              <span className="font-bold mr-1">OFERTA ESPECIAL</span> • Apenas{' '}
-              <span className="font-bold inline-block">{remainingSpots}</span>{' '}
-              vagas disponíveis
-            </motion.div>
-
             <motion.h1
               className="text-3xl md:text-5xl font-bold mb-4 leading-tight"
               initial={{ opacity: 0, y: -20 }}
@@ -450,7 +434,7 @@ const SalesPage: React.FC = () => {
                 <div className="text-right">
                   <span className="text-white/80 text-sm">Hoje Apenas</span>
                   <div className="text-2xl md:text-3xl font-bold text-yellow-300">
-                    R$19,90
+                    R$9,97
                   </div>
                 </div>
               </div>
@@ -956,7 +940,7 @@ const SalesPage: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <div className="text-2xl md:text-3xl font-bold text-green-600">
-                      R$19,90
+                      R$9,97
                     </div>
                     <div className="text-xs text-gray-500">
                       Pagamento único • Acesso vitalício
@@ -1105,6 +1089,31 @@ const SalesPage: React.FC = () => {
         {/* FAQ - Redesenhado */}
         <section className="py-12 md:py-16 bg-gray-50">
           <div className="max-w-4xl mx-auto px-5">
+            {/* Garantia movida para cima */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 max-w-md mx-auto mb-8"
+            >
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <Shield className="w-6 h-6 md:w-8 md:h-8 text-yellow-300" />
+                <h3 className="font-bold text-[#2D1441] text-lg md:text-xl">
+                  Garantia Incondicional de 7 Dias
+                </h3>
+              </div>
+              <p className="text-sm md:text-base text-gray-700 mb-4">
+                Experimente o método completo por 7 dias. Se por qualquer
+                motivo não estiver 100% satisfeito, basta enviar um email e
+                devolveremos integralmente seu investimento, sem perguntas.
+              </p>
+              <div className="text-xs text-gray-600 text-center">
+                Sua compra está protegida pela política de reembolso do
+                Hotmart
+              </div>
+            </motion.div>
+
             <motion.div
               className="text-center mb-10"
               initial={{ opacity: 0 }}
@@ -1177,7 +1186,7 @@ const SalesPage: React.FC = () => {
               </h2>
               <p className="text-lg mb-8 max-w-2xl mx-auto">
                 Método completo de Yoga na Cadeira por apenas{' '}
-                <span className="font-bold text-yellow-300">R$19,90</span> -
+                <span className="font-bold text-yellow-300">R$9,97</span> -
                 Acesso vitalício
               </p>
 
@@ -1197,7 +1206,7 @@ const SalesPage: React.FC = () => {
                   <div className="text-right">
                     <span className="text-white/80 text-sm">Hoje Apenas</span>
                     <div className="text-2xl md:text-3xl font-bold text-yellow-300">
-                      R$19,90
+                      R$9,97
                     </div>
                   </div>
                 </div>
@@ -1249,31 +1258,6 @@ const SalesPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Garantia movida para cima para não ser cortada */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 max-w-md mx-auto mb-4"
-              >
-                <div className="flex items-center justify-center gap-3 mb-3">
-                  <Shield className="w-6 h-6 md:w-8 md:h-8 text-yellow-300" />
-                  <h3 className="font-bold text-white text-lg md:text-xl">
-                    Garantia Incondicional de 7 Dias
-                  </h3>
-                </div>
-                <p className="text-sm md:text-base text-white/90 mb-4">
-                  Experimente o método completo por 7 dias. Se por qualquer
-                  motivo não estiver 100% satisfeito, basta enviar um email e
-                  devolveremos integralmente seu investimento, sem perguntas.
-                </p>
-                <div className="text-xs text-white/80 text-center">
-                  Sua compra está protegida pela política de reembolso do
-                  Hotmart
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </section>

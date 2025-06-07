@@ -25,41 +25,18 @@ import ProgressBar from './components/ProgressBar';
 // Importação do componente de navegação rápida para desenvolvedores (comentado)
 // import QuickNav from './components/QuickNav';
 import { QuizProvider } from './context/QuizContext';
-import { trackPageView, trackEvent, PixelEvents } from './utils/analytics';
 
 function App() {
   const location = useLocation();
   
-  // Rastrear visualização de página quando a rota mudar
-  useEffect(() => {
-    // Rastrear visualização de página padrão
-    trackPageView();
-    
-    // Rastrear evento específico de visualização de conteúdo com o caminho atual
-    trackEvent(PixelEvents.VIEW_CONTENT, {
-      content_name: location.pathname,
-      content_category: 'page_view'
-    });
-    
-    // Eventos específicos para etapas importantes do funil
-    if (location.pathname === '/sales') {
-      trackEvent('SalesPageView');
-    } else if (location.pathname === '/checkout') {
-      trackEvent(PixelEvents.INITIATE_CHECKOUT);
-    } else if (location.pathname === '/success') {
-      trackEvent(PixelEvents.PURCHASE);
-    }
-    
-  }, [location.pathname]);
-  
   return (
-    <div className="min-h-screen bg-white flex flex-col overflow-hidden">
-      <QuizProvider>
+    <QuizProvider>
+      <div className="min-h-screen bg-gradient-to-b from-[#F7F3FF] to-white">
         <ProgressBar />
         {/* Componente de navegação rápida para desenvolvedores (comentado) */}
         {/* <QuickNav /> */}
         
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<AgeSelection />} />
             {/* Removido: <Route path="/sex-selection" element={<SexSelection />} /> */}
@@ -83,8 +60,8 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </AnimatePresence>
-      </QuizProvider>
-    </div>
+      </div>
+    </QuizProvider>
   );
 }
 
